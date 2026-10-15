@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenColab</title>
+<style>
+:root{color-scheme:light dark;font:13px/1.4 system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;padding:10px;background:transparent;color:inherit}
+.toolbar{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+input{flex:1;min-width:220px;background:var(--oc-input,#fff);color:var(--oc-fg,#222);border:1px solid var(--oc-border,#bbb);border-radius:7px;padding:8px 10px;font:inherit}
+button{border:1px solid var(--oc-border,#aaa);border-radius:7px;padding:8px 10px;background:var(--oc-button,#f4f4f4);color:var(--oc-fg,#222);font:inherit;cursor:pointer}
+button.primary{background:var(--oc-accent,#2563eb);color:white;border-color:transparent}button:disabled{opacity:.5;cursor:wait}
+.status{margin-top:7px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;color:var(--oc-muted,#777);font-size:12px}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#888;margin-right:5px}.dot.ok{background:#22a06b}.dot.bad{background:#d64545}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <input id="url" type="url" spellcheck="false" value="https://colab.research.google.com/" aria-label="Page URL">
+  <button id="open" class="primary">Open</button>
+  <button id="reload">Reload</button>
+  <button id="home">Colab</button>
+  <button id="endpoint">9Router endpoint</button>
+</div>
+<details style="margin-top:7px">
+  <summary style="cursor:pointer;color:var(--oc-muted,#777)">9Router settings</summary>
+  <div class="toolbar" style="margin-top:7px">
+    <input id="endpointInput" type="url" placeholder="https://your-tunnel.example/v1" aria-label="9Router API endpoint">
+    <button id="saveEndpoint">Save endpoint</button>
+  </div>
+  <div style="margin-top:4px;color:var(--oc-muted,#777);font-size:12px">Only the public HTTPS API URL ending in /v1. Never enter tunnel credentials or API keys here.</div>
+</details>
+<div class="status">
+  <span><i id="dot" class="dot"></i><span id="state">Connecting to local browser service…</span></span>
+  <span id="title"></span>
+  <span id="endpointStatus"></span>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
