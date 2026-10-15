@@ -3,13 +3,13 @@
   var host, busy = false;
   var $ = function (id) { return document.getElementById(id); };
   var urlInput = $("url"), stateEl = $("state"), dot = $("dot");
-  var titleEl = $("title"), endpointStatus = $("endpointStatus");
+  var titleEl = $("title");
 
   function setStatus(text, kind) { stateEl.textContent = text; dot.className = "dot" + (kind ? " " + kind : ""); }
   async function run(method, path, body) {
     if (busy) return;
     busy = true;
-    ["open","reload","home","endpoint","saveEndpoint"].forEach(function (id) { $(id).disabled = true; });
+    ["open","reload","home"].forEach(function (id) { $(id).disabled = true; });
     try {
       var raw = await host.serviceRequest({ method: method, path: path, body: body === undefined ? undefined : JSON.stringify(body) });
       var data = raw && raw.body;
@@ -18,7 +18,7 @@
       return data || raw;
     } finally {
       busy = false;
-      ["open","reload","home","endpoint","saveEndpoint"].forEach(function (id) { $(id).disabled = false; });
+      ["open","reload","home"].forEach(function (id) { $(id).disabled = false; });
     }
   }
   async function refresh() {
@@ -26,8 +26,6 @@
       var s = await run("GET", "/state");
       setStatus(s.running ? "Browser session running" : "Browser session not started", s.running ? "ok" : "");
       titleEl.textContent = s.title ? "— " + s.title : "";
-      endpointStatus.textContent = s.endpoint ? "9Router: " + s.endpoint : "9Router endpoint not configured";
-      if (s.endpoint && !$("endpointInput").value) $("endpointInput").value = s.endpoint;
       if (s.url) urlInput.value = s.url;
     } catch (e) { setStatus("Service unavailable: " + e.message, "bad"); }
   }
@@ -41,18 +39,6 @@
     catch (e) { setStatus(e.message, "bad"); }
   });
   $("home").addEventListener("click", function () { urlInput.value = "https://colab.research.google.com/"; $("open").click(); });
-  $("endpoint").addEventListener("click", async function () {
-    try { var s = await run("GET", "/state"); if (!s.endpoint) throw new Error("Set the endpoint in 9Router settings first."); await host.writeClipboard(s.endpoint); setStatus("9Router endpoint copied", "ok"); }
-    catch (e) { setStatus(e.message, "bad"); }
-  });
-  $("saveEndpoint").addEventListener("click", async function () {
-    try {
-      var saved = await run("POST", "/endpoint", { endpoint: $("endpointInput").value.trim() });
-      endpointStatus.textContent = saved.endpoint ? "9Router: " + saved.endpoint : "9Router endpoint not configured";
-      setStatus("Endpoint saved", "ok");
-    } catch (e) { setStatus(e.message, "bad"); }
-  });
-
   // Minimal local host bridge using OpenChamber's documented SDK wire envelope.
   function connectHost() {
     var seq = 0, pending = new Map(), readyListeners = [], channel = "openchamber.sdk", version = 1;
