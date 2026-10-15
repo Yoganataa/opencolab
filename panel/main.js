@@ -2,7 +2,6 @@
   "use strict";
 
   var host;
-  var busy = false;
   var bootPromise = null;
   var $ = function (id) { return document.getElementById(id); };
   var stateEl = $("state");
