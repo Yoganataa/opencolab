@@ -13,7 +13,7 @@ const PROFILE = path.join(os.homedir(), ".openchamber-opencolab", "profile");
 const DEFAULT_URL = "https://colab.research.google.com/";
 const VIEW_W = 1440, VIEW_H = 900;
 let child = null, ws = null, wsReady = false;
-let nextId = 1, pending = new Map(), currentUrl = "", currentTitle = "OpenColab";
+let nextId = 1, pending = new Map(), currentUrl = "", currentTitle = "Google Colab";
 let frame = Buffer.alloc(0), frameSeq = 0, frameAt = 0, captureTimer = null;
 let viewport = { width: VIEW_W, height: VIEW_H };
 let frameWaiters = [];
