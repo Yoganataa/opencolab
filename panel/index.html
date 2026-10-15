@@ -21,16 +21,9 @@ button.primary{background:var(--oc-accent,#2563eb);color:white;border-color:tran
   <button id="open" class="primary">Open</button>
   <button id="reload">Reload</button>
   <button id="home">Colab</button>
-  <button id="endpoint">9Router endpoint</button>
+
 </div>
-<details style="margin-top:7px">
-  <summary style="cursor:pointer;color:var(--oc-muted,#777)">9Router settings</summary>
-  <div class="toolbar" style="margin-top:7px">
-    <input id="endpointInput" type="url" placeholder="https://your-tunnel.example/v1" aria-label="9Router API endpoint">
-    <button id="saveEndpoint">Save endpoint</button>
-  </div>
-  <div style="margin-top:4px;color:var(--oc-muted,#777);font-size:12px">Only the public HTTPS API URL ending in /v1. Never enter tunnel credentials or API keys here.</div>
-</details>
+
 <div class="status">
   <span><i id="dot" class="dot"></i><span id="state">Connecting to local browser service…</span></span>
   <span id="title"></span>
