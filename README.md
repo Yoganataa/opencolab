@@ -14,7 +14,7 @@ OpenColab adds a live, interactive Google Colab surface to OpenChamber Desktop. 
 
 1. Install Google Chrome, Chromium, or Microsoft Edge on the same computer as OpenChamber Desktop.
 2. In OpenChamber, open **Settings → Extensions → Add**.
-3. Install from Git URL: `https://github.com/Yoganataa/opencolab`.
+3. Install from Git URL: `https://github.com/Yoganataa/opencolab`. The extension manifest follows the same `openchamber` package envelope used by the official OpenChamber Excalidraw extension.
 4. Review and approve the local service permission. A guest service runs with the user's OS privileges; the manifest permission list is descriptive, not a security sandbox.
 5. Open the **OpenColab** panel, then click **Open** to start Colab.
 6. Sign in if Google allows the browser environment. Under **9Router settings**, paste the public HTTPS endpoint ending in `/v1` and save. Use **9Router endpoint** to copy it.
