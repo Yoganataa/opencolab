@@ -1,6 +1,6 @@
 {
   "name": "opencolab",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Open Google Colab automatically inside OpenChamber with a persistent browser session.",
   "private": false,
   "license": "MIT",
