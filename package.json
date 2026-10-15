@@ -1,7 +1,7 @@
 {
   "name": "opencolab",
-  "version": "0.1.4",
-  "description": "Manage a persistent Google Colab browser session and Colab-hosted 9Router from OpenChamber.",
+  "version": "0.1.5",
+  "description": "Open Google Colab automatically inside OpenChamber with a persistent browser session.",
   "private": false,
   "license": "MIT",
   "openchamber": {
