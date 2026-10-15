@@ -1,34 +1,37 @@
 {
   "name": "opencolab",
-  "displayName": "OpenColab",
+  "version": "0.1.3",
   "description": "Manage a persistent Google Colab browser session and Colab-hosted 9Router from OpenChamber.",
-  "version": "0.1.2",
-  "apiVersion": 1,
-  "engines": {
-    "openchamber": ">=1.22.0"
-  },
-  "contributes": {
-    "panel": {
-      "id": "open-colab",
-      "name": "OpenColab",
-      "icon": "icon.svg",
-      "entry": "panel/index.html",
-      "dock": "top",
-      "size": 58
+  "private": false,
+  "license": "MIT",
+  "openchamber": {
+    "apiVersion": 1,
+    "engines": {
+      "openchamber": ">=2.0.4"
     },
-    "service": {
-      "entry": "service/main.js",
-      "runtime": "host",
-      "surface": true,
-      "permissions": {
-        "exec": [
-          "google-chrome",
-          "google-chrome-stable",
-          "chromium",
-          "chromium-browser",
-          "microsoft-edge",
-          "microsoft-edge-stable"
-        ]
+    "contributes": {
+      "panel": {
+        "id": "open-colab",
+        "name": "OpenColab",
+        "icon": "icon.svg",
+        "entry": "panel/index.html",
+        "dock": "top",
+        "size": 58
+      },
+      "service": {
+        "entry": "service/main.js",
+        "runtime": "host",
+        "surface": true,
+        "permissions": {
+          "exec": [
+            "google-chrome",
+            "google-chrome-stable",
+            "chromium",
+            "chromium-browser",
+            "microsoft-edge",
+            "microsoft-edge-stable"
+          ]
+        }
       }
     }
   }
