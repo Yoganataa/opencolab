@@ -11,7 +11,7 @@
     busy = true;
     ["open","reload","home","endpoint","saveEndpoint"].forEach(function (id) { $(id).disabled = true; });
     try {
-      var raw = await host.serviceRequest({ method: method, path: path, body: body });
+      var raw = await host.serviceRequest({ method: method, path: path, body: body === undefined ? undefined : JSON.stringify(body) });
       var data = raw && raw.body;
       if (typeof data === "string") { try { data = JSON.parse(data); } catch (_) {} }
       if (raw && raw.status >= 400) throw new Error((data && data.error) || ("HTTP " + raw.status));
