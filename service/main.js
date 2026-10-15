@@ -15,7 +15,7 @@ const VIEW_W = 1440, VIEW_H = 900;
 let child = null, ws = null, wsReady = false;
 let nextId = 1, pending = new Map(), currentUrl = "", currentTitle = "OpenColab";
 let frame = Buffer.alloc(0), frameSeq = 0, frameAt = 0, captureTimer = null;
-let viewport = { width: VIEW_W, height: VIEW_H }, endpoint = "";
+let viewport = { width: VIEW_W, height: VIEW_H };
 let frameWaiters = [];
 
 function sendJson(res, status, value) {
@@ -167,12 +167,7 @@ async function route(req,res) {
   if (!authorized(req)) return sendJson(res,401,{error:"Unauthorized service request"});
   const url=new URL(req.url,"http://127.0.0.1");
   if (req.method==="GET"&&url.pathname==="/health") return sendJson(res,200,{ok:true});
-  if (req.method==="GET"&&url.pathname==="/state") return sendJson(res,200,{running:!!(child&&!child.killed&&wsReady),url:currentUrl,title:currentTitle,endpoint:endpoint||null,frameSeq,frameAt});
-  if (req.method==="POST"&&url.pathname==="/endpoint") {
-    const body=await readBody(req), v=String(body.endpoint||"").trim();
-    if (v&&!/^https:\/\/[a-z0-9.-]+(?::\d+)?\/v1\/?$/i.test(v)) return sendJson(res,400,{error:"Endpoint must be an https URL ending in /v1."});
-    endpoint=v.replace(/\/$/,""); return sendJson(res,200,{endpoint});
-  }
+  if (req.method==="GET"&&url.pathname==="/state") return sendJson(res,200,{running:!!(child&&!child.killed&&wsReady),url:currentUrl,title:currentTitle,frameSeq,frameAt});
   if (req.method==="POST"&&url.pathname==="/navigate") {
     const body=await readBody(req); try { return sendJson(res,200,await navigate(String(body.url||DEFAULT_URL))); } catch(e) { return sendJson(res,400,{error:e.message}); }
   }
